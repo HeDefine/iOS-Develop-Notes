@@ -17,7 +17,7 @@
 #### 2019.11
 ............(一切尽在不言中)
 
-##目录
+## 目录
 + 前言
 + 名词解释
 + OC消息传递和转发机制
@@ -37,9 +37,9 @@
 我注意到在源码 _`<objc/runtime.h>`_ 的注释中有写到 `/* Use Class' instead of 'struct objc_class *' */ `, 可以推断，苹果其实都不建议直接用结构体指针来命名该类型类型的值。
 
 
-##名词解析
-####1. 源码 `<objc/objc.h>` 中的名词
-#####①实例对象 ===>  id 和结构体 objc_object
+## 名词解析
+#### 1. 源码 `<objc/objc.h>` 中的名词
+##### ①实例对象 ===>  id 和结构体 objc_object
 ```objc
 /// A pointer to an instance of a class.
 typedef struct objc_object *id;
@@ -53,7 +53,7 @@ struct objc_object {
 ```
 注释说明, **objc_object 表示一个类的实例**。**objc_object** 里面有一个 Class 类型的 isa 指针，这个指针指向了这个对象的类对象
 
-#####②类 ==== Class 和结构体 objc_class
+##### ②类 ==== Class 和结构体 objc_class
 ```objc
 /// An opaque type that represents an Objective-C class.
 typedef struct objc_class *Class;
@@ -139,7 +139,7 @@ SEL selector1 = @selector(description);
 那么其实 我们是否可以大胆得得出一个结论：**SEL** 其实就只是 一个方法名 或者说 标识. 这一点其实从
 后面的 **objc_method** 结构体中 `SEL method_name` 命名可以看出。
 
-#####④方法实现 ==== IMP
+##### ④方法实现 ==== IMP
 ```objc
 typedef void (*IMP)(void /* id, SEL, ... */ );                  // 有返回值
 typedef id _Nullable (*IMP)(id _Nonnull, SEL _Nonnull, ...);    // 无返回值
@@ -149,8 +149,8 @@ IMP（Implementation）是一个指向 **方法实现的地址** 的指针，参
 
 
 
-####2. 源码`<objc/runtime.h>`中的名词
-#####①实例变量 ==== Ivar 和结构体 objc_ivar
+#### 2. 源码`<objc/runtime.h>`中的名词
+##### ①实例变量 ==== Ivar 和结构体 objc_ivar
 ```objc
 typedef struct objc_ivar *Ivar;
 struct objc_ivar {
@@ -163,10 +163,10 @@ struct objc_ivar {
 Ivar是用来定义对象的实例变量。Ivar是objc_ivar结构体，从结构体看出，Ivar包括类型和名字等。
 > 这里有人会奇怪，Ivar (实例) 和 Property (属性) 有什么区别？我个人的想法是Ivar 和 Property主要差别在于property包括了Ivar的属性以外，还封装了setter( ) 和 getter( ) 方法。还有更底层的现在就不去了解了，比如objc_property等
 
-#####②方法 ==== Method 和结构体 objc_method
+##### ②方法 ==== Method 和结构体 objc_method
 
-#####③分类 ==== Category 和结构体 objc_category
-#####④协议 ==== Protocol
+##### ③分类 ==== Category 和结构体 objc_category
+##### ④协议 ==== Protocol
 
 
 
@@ -208,6 +208,6 @@ struct objc_class {
 };  
 ```
 
-##参考
+## 参考
 1. [runtime官方源码下载地址](https://opensource.apple.com/tarballs/objc4/)
 2. [深入理解objc中的类与对象](https://www.jianshu.com/p/9128a3ccf1ff)
